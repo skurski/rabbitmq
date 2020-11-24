@@ -1,0 +1,2 @@
+
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop HD 430 G7","key":"hp.laptops.poland", "price":5299.99}' http://localhost:8080/laptop
