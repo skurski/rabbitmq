@@ -11,14 +11,14 @@ docker build -t producer-rabbitmq .
 cd ../consumer
 ./gradlew build
 
-# Build producer image
+# Build consumer image
 docker build -t consumer-rabbitmq .
 
-# Run images inside one network created by docker compose
+# Run rabbitMQ and producer
 cd ..
 docker-compose -f producer-compose.yml up -d
 
-# Execute request to REST app
+# Execute REST requests to producer app
 sleep 5s
 curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop HD 430 G7","key":"hp.laptops.poland", "price":5299.99}' http://localhost:8080/laptop;
 printf "\n"
@@ -30,7 +30,7 @@ curl --header "Content-Type: application/json" --request POST --data '{"name":"L
 printf "\n"
 sleep 5s 
 
-# Run consumers that will pull messages from queues
+# Run multiple consumers that will pull messages from queues
 docker-compose -f consumer-compose.yml up -d
 
 exec bash
