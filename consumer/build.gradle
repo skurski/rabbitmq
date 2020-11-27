@@ -17,7 +17,10 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-core'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations'
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
-	implementation 'org.projectlombok:lombok'
+
+	compileOnly('org.projectlombok:lombok:1.18.10')
+	annotationProcessor ('org.projectlombok:lombok:1.18.16')
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 }

@@ -19,6 +19,13 @@ public class LaptopRequest {
         this.laptopService = laptopService;
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<String> hello(){
+        log.info("Hello from app!");
+        return Mono.just("Hello from RabbitMQ App");
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Laptop> createProduct(@RequestBody Laptop laptop){

@@ -1,0 +1,41 @@
+version: '3.5'
+services:
+  app-hp-consumer-container:
+    restart: on-failure
+    image: consumer-rabbitmq
+    container_name: app-hp-consumer
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    environment:
+     - rabbit.queue.names=hp_laptops_queue,lenovo_laptops_queue
+    volumes:
+      - /data/consumer
+  app-dell-consumer-container:
+    restart: on-failure
+    image: consumer-rabbitmq
+    container_name: app-dell-consumer
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8092:8092"
+    environment:
+     - rabbit.queue.names=dell_laptops_queue
+    volumes:
+      - /data/consumer
+  app-general-consumer-container:
+    restart: on-failure
+    image: consumer-rabbitmq
+    container_name: app-general-consumer
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8093:8093"
+    environment:
+     - rabbit.queue.names=general_laptops_queue
+    volumes:
+      - /data/consumer

@@ -1,0 +1,10 @@
+#!/bin/bash
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop HD 430 G7","key":"hp.laptops.poland", "price":5299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Dell Precision 3520","key":"dell.laptops.poland", "price":6299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Lenovo Thinkpad X1","key":"lenovo.laptops.poland", "price":7299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Dell XPS","key":"dell.laptops.poland", "price":9299.99}' http://localhost:8080/laptop;
+printf "\n"
+exec bash

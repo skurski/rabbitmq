@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Build producer jar
+cd producer
+./gradlew build
+
+# Build producer image
+docker build -t producer-rabbitmq .
+
+# Build consumer jar
+cd ../consumer
+./gradlew build
+
+# Build producer image
+docker build -t consumer-rabbitmq .
+
+# Run images inside one network created by docker compose
+cd ..
+docker-compose -f producer-compose.yml up -d
+
+# Execute request to REST app
+sleep 5s
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop HD 430 G7","key":"hp.laptops.poland", "price":5299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Dell Precision 3520","key":"dell.laptops.poland", "price":6299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Lenovo Thinkpad X1","key":"lenovo.laptops.poland", "price":7299.99}' http://localhost:8080/laptop;
+printf "\n"
+curl --header "Content-Type: application/json" --request POST --data '{"name":"Laptop Dell XPS","key":"dell.laptops.poland", "price":9299.99}' http://localhost:8080/laptop;
+printf "\n"
+sleep 5s 
+
+# Run consumers that will pull messages from queues
+docker-compose -f consumer-compose.yml up -d
+
+exec bash
